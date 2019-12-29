@@ -50,8 +50,8 @@ object PSchema {
   //TODO: Enrich with all primitives
   implicit def optType[T](implicit t: PSchema[T]): PSchema[Option[T]] =
     new PSchema[Option[T]] {
-      override type Out  = T
-      override type From = T
+      type Out  = T
+      type From = T
 
       override def required: Label.Arity = Label.Optional
 
