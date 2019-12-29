@@ -6,10 +6,10 @@ private[francescofrontera] object Label {
   }
 
   case object Required extends Arity {
-    override def label: String = "required"
+    override val label: String = "required"
   }
 
   case object Optional extends Arity {
-    override def label: String = "optional"
+    override val label: String = "optional"
   }
 }

@@ -6,14 +6,14 @@ object ValueType {
   }
 
   case object ProtobufRecord extends VType {
-    override def label: String = "ProtobufSchema"
+    override val label: String = "ProtobufSchema"
   }
 
   case object StringType extends VType {
-    override def label: String = "string"
+    override val label: String = "string"
   }
 
   case object IntType extends VType {
-    override def label: String = "int32"
+    override val label: String = "int32"
   }
 }
