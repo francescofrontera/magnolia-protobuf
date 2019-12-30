@@ -86,9 +86,9 @@ object PSchema {
           .build()
       }
 
-      def valueType: ValueType.VType = ValueType.ProtobufRecord
+      val valueType: ValueType.VType = ValueType.ProtobufRecord
 
-      override def schema: DynamicSchema = {
+      val schema: DynamicSchema = {
         val msgName = s"${caseClass.typeName.short}Message"
         val (builder, _) = caseClass.parameters
           .foldLeft((MessageDefinition.newBuilder(msgName), 0)) {
