@@ -1,4 +1,4 @@
-package io.github.francescofrontera
+package io.github.francescofrontera.datatype
 
 object ValueType {
   sealed trait VType {

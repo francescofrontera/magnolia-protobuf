@@ -2,6 +2,7 @@ package io.github.francescofrontera
 
 import com.github.os72.protobuf.dynamic.{ DynamicSchema, MessageDefinition }
 import com.google.protobuf.DynamicMessage
+import io.github.francescofrontera.datatype.{ Label, ValueType }
 import magnolia._
 
 import scala.language.experimental.macros
@@ -62,7 +63,6 @@ object PSchema {
       def to(in: Option[T]): T = in.getOrElse(null.asInstanceOf[T])
     }
 
-  // Derive with magnolia..
   def combine[T](caseClass: CaseClass[Typeclass, T]): Type[T] =
     new Type[T] {
 
@@ -79,9 +79,15 @@ object PSchema {
         caseClass.parameters
           .foldLeft(builder) {
             case (acc, field) =>
-              val value = field.typeclass.to(field.dereference(in))
-              if (value == null) acc
-              else acc.setField(descriptor.findFieldByName(field.label), value)
+              val defer = field.dereference(in)
+              val value = field.typeclass.to(defer)
+
+              Option(value).fold(acc) { fValue =>
+                acc.setField(
+                  descriptor.findFieldByName(field.label),
+                  fValue
+                )
+              }
           }
           .build()
       }

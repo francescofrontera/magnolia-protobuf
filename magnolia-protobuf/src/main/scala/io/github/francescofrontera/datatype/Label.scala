@@ -1,8 +1,12 @@
-package io.github.francescofrontera
+package io.github.francescofrontera.datatype
 
 private[francescofrontera] object Label {
   sealed trait Arity {
     def label: String
+
+    final def isNullable: Boolean =
+      if (label.equalsIgnoreCase("optional")) true
+      else false
   }
 
   case object Required extends Arity {
